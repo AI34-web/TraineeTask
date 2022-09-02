@@ -79,8 +79,10 @@ class ViewController: UIViewController, UITableViewDataSource {
             guard let data = data else { return }
             
                 do {
-                    let company = try JSONDecoder().decode(Company.self, from: data)
+                    var company = try JSONDecoder().decode(Company.self, from: data)
+                    company.company.employees = company.company.employees.sorted{$0.name < $01.name}
                     self.company = company
+                    print(company.company.employees)
                 }
                 catch {
                     print(error)
